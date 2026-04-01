@@ -6,10 +6,14 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 app.secret_key = "duata_kingbawl_exclusive_key"
 
-# --- CONFIG ---
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///office.db'
+# --- DATABASE CONFIG (AUTOMATIC PATH) ---
+# He lai hian i folder hmun a hmu lawk anga, 'instance' folder a zawng nghal ang
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'instance', 'office.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-UPLOAD_FOLDER = os.path.join('static', 'uploads')
+
+# Upload folder setup
+UPLOAD_FOLDER = os.path.join(basedir, 'static', 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 if not os.path.exists(UPLOAD_FOLDER):
@@ -50,13 +54,12 @@ def login():
     u_input = request.form.get('username')
     p_input = request.form.get('password')
     
-    # Database-ah user kan zawng ang
     user = User.query.filter_by(username=u_input).first()
     
     if user and user.password == p_input:
         session['user'] = user.username
         return redirect(url_for('dashboard'))
-    return redirect(url_for('index'))
+    return render_template('login.html', error="Username emaw Password a dik lo")
 
 @app.route('/dashboard')
 def dashboard():
@@ -141,7 +144,6 @@ def delete_folder(id, cat_type):
     db.session.commit()
     return redirect(url_for('category_page', cat_type=cat_type))
 
-# --- SETTINGS & PASSWORD UPDATE (Permanent) ---
 @app.route('/settings')
 def settings():
     if 'user' not in session: return redirect(url_for('index'))
@@ -150,17 +152,14 @@ def settings():
 @app.route('/update_password', methods=['POST'])
 def update_password():
     if 'user' not in session: return redirect(url_for('index'))
-    
     current_p = request.form.get('current_password')
     new_p = request.form.get('new_password')
     confirm_p = request.form.get('confirm_password')
-
     user = User.query.filter_by(username=session['user']).first()
-
     if user and user.password == current_p:
         if new_p == confirm_p:
             user.password = new_p
-            db.session.commit() # Database-ah permanent-in a save tawh ang
+            db.session.commit()
             return render_template('setting.html', success="Password successfully updated!")
         else:
             return render_template('setting.html', error="New passwords do not match!")
@@ -175,7 +174,6 @@ def logout():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-        # Admin user a awm loh chuan kan siam nghal ang
         if not User.query.filter_by(username="LA_BRANCH").first():
             admin = User(username="LA_BRANCH", password="LABranch")
             db.session.add(admin)
