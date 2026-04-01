@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Directory - LA Branch Siaha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;600;800&family=Poppins:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #f59e0b;
+            --glass: rgba(255, 255, 255, 0.05);
+            --text-main: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f172a;
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        .header-section {
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .header-section h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            line-height: 1;
+        }
+
+        .back-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover { opacity: 0.7; }
+
+        /* Admin Registration Panel */
+        .registration-panel {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            border-radius: 25px;
+            margin-bottom: 60px;
+        }
+
+        .registration-panel h2 {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1.5fr 1fr;
+            gap: 15px;
+            align-items: center;
+        }
+
+        input[type="text"], input[type="file"] {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 20px;
+            border-radius: 12px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            width: 100%;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent);
+        }
+
+        .btn-add {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .btn-add:hover {
+            transform: scale(1.03);
+            filter: brightness(1.1);
+        }
+
+        /* Staff Card Grid */
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .staff-card {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 35px;
+            padding: 35px 20px;
+            text-align: center;
+            text-decoration: none;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .staff-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .staff-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .staff-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .staff-card .designation {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .view-btn {
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+
+        /* Delete Link */
+        .del-action {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: #ef4444;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-decoration: none;
+            opacity: 0.3;
+            transition: 0.3s;
+        }
+
+        .del-action:hover { opacity: 1; }
+
+        /* Signature (Instagram Linked) */
+        .signature-link {
+            position: fixed;
+            bottom: 40px;
+            right: 50px;
+            text-decoration: none;
+            transition: 0.4s;
+        }
+
+        .signature-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px;
+            color: rgba(245, 158, 11, 0.7);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-section">
+            <div>
+                <a href="/dashboard" class="back-link">← DASHBOARD</a>
+                <h1>OFFICE STAFFS</h1>
+            </div>
+        </div>
+
+        <div class="registration-panel">
+            <h2>Register New Staff Member</h2>
+            <form action="/add_staff" method="POST" enctype="multipart/form-data" class="form-grid">
+                <input type="text" name="staff_name" placeholder="Full Name" required>
+                <input type="text" name="designation" placeholder="Designation (e.g. Assistant)" required>
+                <input type="file" name="staff_image" accept="image/*">
+                <button type="submit" class="btn-add">Add Member</button>
+            </form>
+        </div>
+
+        <div class="staff-grid">
+            {% for folder in folders %}
+            <div class="staff-card-wrapper" style="position: relative;">
+                <a href="/folder_detail/{{ folder.id }}" class="staff-card" style="display: block;">
+                    <img src="{{ url_for('static', filename='uploads/' + folder.image) }}" class="staff-img" onerror="this.src='https://via.placeholder.com/150'">
+                    <h3>{{ folder.name }}</h3>
+                    <div class="designation">{{ folder.designation }}</div>
+                    <div class="view-btn">VIEW PROFILE & FILES →</div>
+                </a>
+                <a href="#" class="del-action" onclick="if(confirm('Paih i duh takzet em?')) window.location.href='/delete_folder/{{ folder.id }}/STAFFS';">REMOVE</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <a href="https://www.instagram.com/duatakingbawl?igsh=dnZyZ3MzZDM2b3Yz" target="_blank" class="signature-link">
+        <div class="signature-text">Duata Kingbawl</div>
+    </a>
+
+</body>
+</html>

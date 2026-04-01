@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Highway - LA Branch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;600;800&family=Poppins:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #f59e0b;
+            --glass: rgba(255, 255, 255, 0.05);
+            --text-main: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f172a;
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .bg-watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8vw;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.02);
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+        }
+
+        nav {
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.85rem;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+
+        .container {
+            position: relative;
+            z-index: 5;
+            padding: 20px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-section { margin-bottom: 30px; }
+        .header-section h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            color: var(--accent);
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        /* Search & Create Section */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .search-box, .create-box {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            gap: 15px;
+        }
+
+        input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 20px;
+            border-radius: 12px;
+            color: white;
+            outline: none;
+        }
+
+        .create-btn {
+            background: var(--accent);
+            color: black;
+            border: none;
+            padding: 0 25px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        /* Folder Grid */
+        .folder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .folder-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            padding: 40px 20px;
+            border-radius: 25px;
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transition: 0.4s;
+            position: relative;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .folder-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .folder-icon { font-size: 3.5rem; margin-bottom: 15px; display: block; }
+        .folder-card h3 { font-size: 1.1rem; color: var(--text-main); text-transform: uppercase; }
+
+        .delete-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #ef4444;
+            font-size: 0.65rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-decoration: none;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+
+        .delete-btn:hover { opacity: 1; transform: scale(1.1); }
+
+        /* Signature Popup */
+        .signature-link {
+            position: fixed;
+            bottom: 40px;
+            right: 50px;
+            text-decoration: none;
+            z-index: 100;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .signature-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px;
+            color: rgba(245, 158, 11, 0.7);
+        }
+
+        .signature-link:hover {
+            transform: scale(1.25) translateY(-5px);
+            filter: brightness(1.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-watermark">NH FOLDERS</div>
+
+    <nav>
+        <div style="font-weight: 800; letter-spacing: 3px; color: var(--accent);">DC OFFICE SIAHA</div>
+        <div class="nav-links">
+            <a href="/dashboard">DASHBOARD</a>
+            <a href="/logout" style="color: #ef4444;">LOGOUT</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>NATIONAL HIGHWAY</h1>
+            <p style="color: rgba(255,255,255,0.4); font-size: 0.8rem; letter-spacing: 1px;">Land Acquisition Branch Folders</p>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" onkeyup="searchFolder()" placeholder="Zawnna (Search folders)...">
+            </div>
+
+            <form action="/add_folder/NH" method="POST" class="create-box">
+                <input type="text" name="folder_name" placeholder="Folder hming ziak rawh..." required>
+                <button type="submit" class="create-btn">Create Folder</button>
+            </form>
+        </div>
+
+        <div class="folder-grid" id="folderGrid">
+            {% for folder in folders %}
+            <a href="/folder_detail/{{ folder.id }}" class="folder-card">
+                <span onclick="event.preventDefault(); if(confirm('Folder hi paih i duh tak tak em?')) window.location.href='/delete_folder/{{ folder.id }}/NH';" class="delete-btn">DELETE</span>
+                
+                <span class="folder-icon">📂</span>
+                <h3>{{ folder.name }}</h3>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <a href="https://www.instagram.com/duatakingbawl?igsh=dnZyZ3MzZDM2b3Yz" target="_blank" class="signature-link">
+        <div class="signature-text">Duata Kingbawl</div>
+    </a>
+
+    <script>
+        function searchFolder() {
+            let input = document.getElementById('searchInput').value.toUpperCase();
+            let grid = document.getElementById('folderGrid');
+            let cards = grid.getElementsByClassName('folder-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let h3 = cards[i].getElementsByTagName('h3')[0];
+                if (h3.innerText.toUpperCase().indexOf(input) > -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

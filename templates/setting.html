@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - LA Branch Siaha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;600;800&family=Poppins:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #f59e0b;
+            --glass: rgba(255, 255, 255, 0.05);
+            --text-main: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f172a;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Full Screen Watermark */
+        .bg-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5.2vw; 
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.02);
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+            text-transform: uppercase;
+            letter-spacing: 4px; 
+            width: 100%;
+            text-align: center;
+            user-select: none;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 30px 60px;
+            z-index: 10;
+        }
+
+        .back-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover { opacity: 0.7; }
+
+        /* Main Content */
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+            padding: 20px;
+        }
+
+        .settings-card {
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 50px;
+            border-radius: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .settings-card h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            letter-spacing: 2px;
+            color: var(--text-main);
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .form-group input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            border-radius: 15px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .update-btn {
+            width: 100%;
+            background: var(--accent);
+            color: #000;
+            padding: 18px;
+            border-radius: 15px;
+            font-weight: 900;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .update-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(245, 158, 11, 0.2);
+        }
+
+        /* Status Messages */
+        .status-msg {
+            text-align: center;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .error { color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+        .success { color: #10b981; background: rgba(16, 185, 129, 0.1); }
+
+        /* Digital Signature */
+        .signature-link {
+            position: fixed;
+            bottom: 40px;
+            right: 50px;
+            text-decoration: none;
+            z-index: 100;
+            transition: 0.4s;
+        }
+
+        .signature-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px;
+            color: rgba(245, 158, 11, 0.7);
+        }
+
+        .signature-link:hover { transform: scale(1.1); }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-watermark">ADMINISTRATION SECURITY</div>
+
+    <nav>
+        <a href="/dashboard" class="back-link">← BACK TO DASHBOARD</a>
+    </nav>
+
+    <div class="main-container">
+        <div class="settings-card">
+            <h1>SETTINGS</h1>
+
+            {% if error %}
+                <div class="status-msg error">{{ error }}</div>
+            {% endif %}
+            {% if success %}
+                <div class="status-msg success">{{ success }}</div>
+            {% endif %}
+
+            <form action="/update_password" method="POST">
+                <div class="form-group">
+                    <label>Current Password</label>
+                    <input type="password" name="current_password" placeholder="Enter old password" required>
+                </div>
+
+                <div class="form-group">
+                    <label>New Password</label>
+                    <input type="password" name="new_password" placeholder="Enter new password" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm New Password</label>
+                    <input type="password" name="confirm_password" placeholder="Confirm new password" required>
+                </div>
+
+                <button type="submit" class="update-btn">Update Password</button>
+            </form>
+        </div>
+    </div>
+
+    <a href="https://www.instagram.com/duatakingbawl?igsh=dnZyZ3MzZDM2b3Yz" target="_blank" class="signature-link">
+        <div class="signature-text">Duata Kingbawl</div>
+    </a>
+
+</body>
+</html>

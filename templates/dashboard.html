@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - LA Branch Siaha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;600;800&family=Poppins:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #f59e0b;
+            --glass: rgba(255, 255, 255, 0.05);
+            --text-main: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f172a;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; 
+            position: relative;
+        }
+
+        /* Full Screen Watermark */
+        .bg-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5.2vw; 
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.02);
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+            text-transform: uppercase;
+            letter-spacing: 4px; 
+            width: 100%;
+            text-align: center;
+            user-select: none;
+        }
+
+        /* Top Navigation */
+        nav {
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.85rem;
+            transition: 0.3s;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Main Container */
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 50px;
+            z-index: 5;
+        }
+
+        /* Heading Pop Effect */
+        .header {
+            margin-bottom: 80px;
+            text-align: center;
+        }
+
+        .header h1 { 
+            font-family: 'Poppins', sans-serif;
+            font-size: 5rem; 
+            font-weight: 900; 
+            letter-spacing: 4px;
+            color: var(--text-main);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+            cursor: default;
+        }
+
+        .header h1:hover {
+            transform: scale(1.15);
+            color: var(--accent);
+            text-shadow: 0 0 40px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Grid & Cards */
+        .grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 75px 30px;
+            border-radius: 35px;
+            text-decoration: none;
+            color: white;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            flex: 1;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card:hover {
+            transform: translateY(-25px);
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+        }
+
+        .card h3 { 
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            letter-spacing: 2px;
+        }
+
+        /* Digital Signature (Instagram Linked) */
+        .signature-link {
+            position: fixed;
+            bottom: 40px;
+            right: 50px;
+            text-decoration: none;
+            z-index: 100;
+            transition: 0.4s;
+        }
+
+        .signature-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px;
+            color: rgba(245, 158, 11, 0.7);
+        }
+
+        .signature-link:hover { transform: scale(1.1); filter: brightness(1.2); }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-watermark">LAND ACQUISITION PROPERTY</div>
+
+    <nav>
+        <div style="font-weight: 800; letter-spacing: 3px; color: var(--accent); font-size: 0.9rem;">DC OFFICE SIAHA</div>
+        <div class="nav-links">
+            <a href="/settings">SETTINGS</a>
+            <a href="/logout" style="color: #ef4444;">LOGOUT</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="header">
+            <h1>LA BRANCH FILE</h1>
+        </div>
+
+        <div class="grid">
+            <a href="/category/NH" class="card">
+                <h3>NATIONAL HIGHWAY</h3>
+            </a>
+            <a href="/category/BRTF" class="card">
+                <h3>BRTF ROADS</h3>
+            </a>
+            <a href="/category/STAFFS" class="card">
+                <h3>LA STAFFS</h3>
+            </a>
+        </div>
+    </div>
+
+    <a href="https://www.instagram.com/duatakingbawl?igsh=dnZyZ3MzZDM2b3Yz" target="_blank" class="signature-link">
+        <div class="signature-text">Duata Kingbawl</div>
+    </a>
+
+</body>
+</html>

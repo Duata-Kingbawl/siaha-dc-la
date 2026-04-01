@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BRTF - {{ folder.name }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;800&family=Poppins:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #0f172a; --accent: #3b82f6; --glass: rgba(255, 255, 255, 0.05); }
+        body { font-family: 'Inter', sans-serif; background: var(--primary); color: white; padding: 40px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header-title { font-family: 'Poppins', sans-serif; font-size: 3.5rem; color: var(--accent); text-transform: uppercase; line-height: 1; }
+        .top-search { background: var(--glass); padding: 15px 30px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); margin: 25px 0; }
+        .top-search input { width: 100%; background: transparent; border: none; color: white; outline: none; }
+        .add-panel { background: var(--glass); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 30px; }
+        table { width: 100%; border-collapse: collapse; background: var(--glass); border-radius: 20px; overflow: hidden; }
+        th, td { padding: 18px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        th { color: var(--accent); font-size: 0.75rem; letter-spacing: 1.5px; }
+        .action-link { text-decoration: none; font-size: 0.75rem; font-weight: 800; margin-right: 15px; }
+        .view { color: #10b981; } .download { color: #60a5fa; } .delete { color: #ef4444; }
+        .signature { position: fixed; bottom: 30px; right: 40px; font-family: 'Dancing Script', cursive; font-size: 28px; color: var(--accent); opacity: 0.6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/category/BRTF" style="color: var(--accent); text-decoration: none; font-weight: 800;">← BACK TO BRTF LIST</a>
+        <h1 class="header-title">BRTF</h1>
+        <h2 style="opacity: 0.6; margin-bottom: 5px;">{{ folder.name }}</h2>
+
+        <div class="top-search">
+            <input type="text" id="fileSearch" onkeyup="searchFiles()" placeholder="Search project name or file no...">
+        </div>
+
+        <div class="add-panel">
+            <form action="/upload_file/{{ folder.id }}" method="POST" enctype="multipart/form-data" style="display: flex; gap: 10px; align-items: center;">
+                <input type="text" name="project_name" placeholder="Project Name" required style="flex:1; padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.1); border: none; color: white;">
+                <input type="text" name="file_no" placeholder="File No." style="flex:1; padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.1); border: none; color: white;">
+                <input type="file" name="file" required style="color: white; font-size: 0.8rem;">
+                <button type="submit" style="background: var(--accent); border: none; padding: 12px 25px; border-radius: 10px; font-weight: 800; cursor: pointer; color: white;">ADD PROJECT</button>
+            </form>
+        </div>
+
+        <table id="fileTable">
+            <thead>
+                <tr>
+                    <th>PROJECT NAME</th>
+                    <th>FILE NO.</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for file in files %}
+                <tr>
+                    <td style="font-weight: 600;">{{ file.project_name }}</td>
+                    <td style="color: var(--accent); font-weight: 800;">{{ file.file_no }}</td>
+                    <td>
+                        <a href="/view_file/{{ file.filename }}" target="_blank" class="action-link view">VIEW</a>
+                        <a href="{{ url_for('static', filename='uploads/' + file.filename) }}" class="action-link download" download>DOWNLOAD</a>
+                        <a href="/delete_file/{{ file.id }}/{{ folder.id }}" class="action-link delete" onclick="return confirm('Paih duh tak tak em?')">DELETE</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="signature">Duata Kingbawl</div>
+    <script>
+        function searchFiles() {
+            let input = document.getElementById('fileSearch').value.toUpperCase();
+            let tr = document.getElementById('fileTable').getElementsByTagName('tr');
+            for (let i = 1; i < tr.length; i++) {
+                let txt = tr[i].innerText.toUpperCase();
+                tr[i].style.display = txt.indexOf(input) > -1 ? "" : "none";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DC Office Siaha - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --accent-gold: #f59e0b;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --text-light: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bg-watermark {
+            position: absolute;
+            font-size: 10vw;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            z-index: 0;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        .login-card {
+            position: relative;
+            z-index: 10;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            padding: 50px 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-card h2 { color: var(--text-light); font-weight: 700; font-size: 1.8rem; margin-bottom: 10px; }
+        .login-card p { color: rgba(248, 250, 252, 0.6); font-size: 0.9rem; margin-bottom: 35px; text-transform: uppercase; letter-spacing: 2px; }
+
+        input {
+            width: 100%; padding: 14px 20px; background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px;
+            color: white; font-size: 1rem; outline: none; transition: 0.3s; margin-bottom: 20px;
+        }
+
+        input:focus { border-color: var(--accent-gold); box-shadow: 0 0 15px rgba(245, 158, 11, 0.2); }
+
+        button {
+            width: 100%; padding: 14px; border: none; border-radius: 12px;
+            background: var(--accent-gold); color: #000; font-weight: 700;
+            font-size: 1rem; cursor: pointer; transition: 0.3s;
+        }
+
+        button:hover { background: #fbbf24; transform: translateY(-2px); }
+
+        .signature-link {
+            position: fixed;
+            bottom: 30px;
+            right: 40px;
+            text-decoration: none;
+            z-index: 20;
+            transition: 0.4s;
+        }
+
+        .signature-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 28px;
+            color: rgba(245, 158, 11, 0.8);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .signature-link:hover { transform: scale(1.1); filter: brightness(1.2); }
+
+        .office-label { font-size: 11px; color: rgba(255, 255, 255, 0.3); margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-watermark">DC OFFICE SIAHA</div>
+
+    <div class="login-card">
+        <h2>DC OFFICE SIAHA</h2>
+        <p>Land Acquisition Branch</p>
+
+        <form action="/login" method="POST">
+            <input type="text" name="username" placeholder="Username (LA_BRANCH)" required autocomplete="off">
+            <input type="password" name="password" placeholder="Password (LABranch)" required>
+            <button type="submit">Luhna (Login)</button>
+        </form>
+
+        <div class="office-label">SIAHA DISTRICT : MIZORAM</div>
+    </div>
+
+    <a href="https://www.instagram.com/duatakingbawl?igsh=dnZyZ3MzZDM2b3Yz" target="_blank" class="signature-link">
+        <div class="signature-text">Duata Kingbawl</div>
+    </a>
+
+</body>
+</html>

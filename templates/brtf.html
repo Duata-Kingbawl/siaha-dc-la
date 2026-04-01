@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BRTF ROADS - LA Branch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;800&family=Poppins:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #0f172a; --accent: #3b82f6; --glass: rgba(255, 255, 255, 0.05); }
+        body { font-family: 'Inter', sans-serif; background: var(--primary); color: white; padding: 40px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .cat-title { font-family: 'Poppins', sans-serif; font-size: 3.5rem; color: var(--accent); text-transform: uppercase; }
+        .top-search { background: var(--glass); padding: 15px 30px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); margin: 30px 0; }
+        .top-search input { width: 100%; background: transparent; border: none; color: white; outline: none; }
+        .folder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
+        .folder-card { background: var(--glass); padding: 40px 20px; border-radius: 25px; text-align: center; text-decoration: none; border: 1.5px solid rgba(255,255,255,0.1); position: relative; transition: 0.3s; }
+        .folder-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .folder-card h3 { color: white; margin-top: 15px; font-size: 1rem; text-transform: uppercase; }
+        .delete-link { position: absolute; top: 15px; right: 15px; color: #ef4444; font-size: 0.7rem; font-weight: 800; text-decoration: none; }
+        .signature { position: fixed; bottom: 30px; right: 40px; font-family: 'Dancing Script', cursive; font-size: 28px; color: var(--accent); opacity: 0.6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/dashboard" style="color: var(--accent); text-decoration: none; font-weight: 800;">← BACK TO DASHBOARD</a>
+        <h1 class="cat-title">BRTF ROADS</h1>
+        
+        <div class="top-search">
+            <input type="text" id="searchInput" onkeyup="searchFolder()" placeholder="Zawnna (Search BRTF folders)...">
+        </div>
+
+        <form action="/add_folder/BRTF" method="POST" style="margin-bottom: 40px; display: flex; gap: 10px;">
+            <input type="text" name="folder_name" placeholder="New BRTF Folder Name..." required style="flex:1; padding: 15px; border-radius: 12px; background: var(--glass); border: 1px solid rgba(255,255,255,0.1); color: white;">
+            <button type="submit" style="background: var(--accent); color: white; border: none; padding: 0 30px; border-radius: 12px; font-weight: 800; cursor: pointer;">CREATE</button>
+        </form>
+
+        <div class="folder-grid" id="folderGrid">
+            {% for folder in folders %}
+            <a href="/folder_detail/{{ folder.id }}" class="folder-card">
+                <span class="delete-link" onclick="event.preventDefault(); if(confirm('Delete folder?')) window.location.href='/delete_folder/{{ folder.id }}/BRTF';">DELETE</span>
+                <div style="font-size: 3rem;">📂</div>
+                <h3>{{ folder.name }}</h3>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="signature">Duata Kingbawl</div>
+
+    <script>
+        function searchFolder() {
+            let input = document.getElementById('searchInput').value.toUpperCase();
+            let cards = document.getElementsByClassName('folder-card');
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getElementsByTagName('h3')[0].innerText;
+                cards[i].style.display = title.toUpperCase().indexOf(input) > -1 ? "" : "none";
+            }
+        }
+    </script>
+</body>
+</html>

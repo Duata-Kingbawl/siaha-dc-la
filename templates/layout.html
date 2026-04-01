@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA Branch Siaha</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>DC OFFICE SIAHA</h2>
+        <a href="/dashboard" class="active">🏠 Dashboard</a>
+        <a href="/category/NH">🛣️ National Highway</a>
+        <a href="/category/BRTF">🚧 BRTF Roads</a>
+        <a href="/staffs">👥 LA Staffs</a>
+        <div style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            <a href="/settings">⚙️ Settings</a>
+            <a href="/logout" style="color: #fb7185;">🚪 Logout</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <div class="signature">Duata Kingbawl</div>
+</body>
+</html>
